@@ -1,59 +1,196 @@
-
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Professional Feedback Form - Blue Theme</title>
-  <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Feedback Form - Blue Theme</title>
+  <style>
+    :root{
+      --bg:#1435f0;
+      --panel:#000000;
+      --muted:#98a0ac;
+      --text:#f8fafc;
+      --accent:#2dd4bf;
+      --accent-2:#06b6d4;
+      --danger:#ef4444;
+    }
+
+    *{box-sizing:border-box;}
+    html,body{height:100%; margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; line-height:1.45; background:linear-gradient(180deg,var(--bg),#9e072d); color:var(--text);}
+
+    body{
+      padding:24px;
+    }
+
+    .site-header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      max-width:1100px;
+      margin:0 auto 18px auto;
+    }
+
+    .site-header img{
+      width:70px;
+      height:auto;
+      border-radius:8px;
+      object-fit:cover;
+    }
+
+    .site-header h1{
+      font-size:20px;
+      margin:0;
+    }
+
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      width:100%;
+    }
+
+    .form{
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,0.04);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(5, 25, 114, 0.6);
+      width:100%;
+      height:auto;
+    }
+
+    .group{
+      border:1px solid rgba(255,255,255,0.06);
+      padding:16px;
+      margin-bottom:14px;
+      border-radius:8px;
+      transition:box-shadow 200ms ease,border-color 200ms ease;
+    }
+
+    .group:hover{border-color:var(--accent); box-shadow:0 8px 30px rgba(13,38,43,0.2);}
+    .group legend{padding:0 6px; font-weight:600; color:var(--muted);}
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .feedback-grid .field-full{grid-column:1 / -1;}
+    .field{display:flex; flex-direction:column; gap:8px;}
+    .field-full{grid-column:1 / -1;}
+
+    label{
+      font-size:13px;
+      color:var(--muted);
+      word-break:break-word;
+    }
+
+    input[type=text],input[type=email],input[type=tel],input[type=file],select,textarea{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:10px 12px;
+      color:var(--text);
+      border-radius:8px;
+      outline:none;
+      transition:border-color 160ms ease,box-shadow 160ms ease,transform 160ms ease;
+      width:100%;
+    }
+
+    input:hover,select:hover,textarea:hover{border-color:rgba(23, 8, 230, 0.18); transform:translateY(-2px);}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent); box-shadow:0 6px 18px rgba(45,212,191,0.08);}
+
+    .btn{
+      padding:10px 16px;
+      border-radius:10px;
+      cursor:pointer;
+      border:1px solid rgba(228, 19, 19, 0.04);
+      background:transparent;
+      color:var(--text);
+      transition:transform 150ms ease,background-color 150ms ease,border-color 150ms ease;
+    }
+
+    .btn.primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border:none;
+      color:#022126;
+    }
+
+    .btn.primary:hover{transform:translateY(-3px);}
+    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.06);}
+
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+
+    .radios label, .checkboxes label{display:inline-flex; gap:8px; flex-wrap:wrap;}
+
+    #backToTop{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      padding:10px 12px;
+      border-radius:8px;
+      border:none;
+      display:none;
+      background:var(--accent);
+      color:#022126;
+      cursor:pointer;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+
+    .site-footer{
+      max-width:1100px;
+      margin:12px auto 0 auto;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* RESPONSIVE RULES */
+    @media (max-width:900px){
+      .form-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:620px){
+      .form-grid{grid-template-columns:1fr;}
+      main, .form{max-width:100%; width:100%; padding:0 12px;}
+      body{padding:12px;}
+    }
+    @media (max-width:480px){
+      input,select,textarea,.btn{width:100%;}
+      .actions{justify-content:stretch;}
+    }
+  </style>
 </head>
 <body>
-  <!-- page header with optional logo image from uploaded file -->
   <header class="site-header">
-   <img src="my image.jpg"" width="70px" height="90px">
-     
+    <img src="https://via.placeholder.com/70x90" alt="Logo">
     <h1>Form</h1> 
   </header>
 
-  <!-- Main form container -->
   <main>
-    <!-- Using a form element so data can be submitted to a backend if needed -->
     <form id="feedbackForm" class="form" novalidate>
-
-      <!-- Fieldset groups related inputs for accessibility and visual grouping -->
       <fieldset class="group">
         <legend>Personal details</legend>
-
-        <!-- Grid used to create 3-column layout on wide screens -->
         <div class="form-grid">
-
-          <!-- Full name. type="text" accepts plain text. required attribute enforces input. -->
           <div class="field">
             <label for="fullname">Full name</label>
             <input id="fullname" name="fullname" type="text" placeholder="Your full name" required>
-            <!-- Comment: text input used for freeform short text. -->
           </div>
-
-          <!-- Email. type="email" provides built-in browser validation for email format. -->
           <div class="field">
             <label for="email">Email</label>
             <input id="email" name="email" type="email" placeholder="name@example.com" required>
-            <!-- Comment: email input helps mobile show email keyboard. -->
           </div>
-
-          <!-- Phone. type="tel" brings numeric keypad on mobile devices. pattern limits characters. -->
           <div class="field">
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000" pattern="[0-9+ -]{7,}" >
-            <!-- Comment: pattern used to allow digits, plus and spaces. -->
+            <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000">
           </div>
-
-          <!-- Department. custom extra field. -->
           <div class="field">
             <label for="department">Department</label>
             <input id="department" name="department" type="text" placeholder="Department or unit">
           </div>
-
-          <!-- Level. custom extra field. example: level of study or job level. -->
           <div class="field">
             <label for="level">Level</label>
             <select id="level" name="level">
@@ -64,24 +201,17 @@
               <option value="400">400</option>
               <option value="staff">Staff</option>
             </select>
-            <!-- Comment: select reduces user errors for fixed choices. -->
           </div>
-
-          <!-- Staff ID. extra field demonstrating another custom input. -->
           <div class="field">
             <label for="staffid">Staff ID</label>
             <input id="staffid" name="staffid" type="text" placeholder="Optional">
           </div>
-
-        </div> <!-- end grid -->
+        </div>
       </fieldset>
 
       <fieldset class="group">
         <legend>Feedback details</legend>
-
         <div class="form-grid feedback-grid">
-
-          <!-- Rating. using select for simple numeric rating. -->
           <div class="field">
             <label for="rating">Rating</label>
             <select id="rating" name="rating" required>
@@ -93,65 +223,46 @@
               <option value="5">5 - excellent</option>
             </select>
           </div>
-
-          <!-- Recommendation. radio ensures single choice selection. -->
           <div class="field">
             <label>Recommend to others</label>
             <div class="radios">
               <label><input type="radio" name="recommend" value="yes" checked> Yes</label>
               <label><input type="radio" name="recommend" value="no"> No</label>
             </div>
-            <!-- Comment: radios for exclusive choice. -->
           </div>
-
-          <!-- Improvements. checkbox allows multiple selections. -->
           <div class="field">
             <label for="improvements">Areas to improve</label>
             <div class="checkboxes" id="improvements">
-              <label><input type="checkbox" name="improve" value="ux"> UX
-              </label>
-              <label><input type="checkbox" name="improve" value="features"> Features
-              </label>
-              <label><input type="checkbox" name="improve" value="support"> Support
-              </label>
+              <label><input type="checkbox" name="improve" value="ux"> UX</label>
+              <label><input type="checkbox" name="improve" value="features"> Features</label>
+              <label><input type="checkbox" name="improve" value="support"> Support</label>
             </div>
-            <!-- Comment: checkboxes let user select multiple items. -->
           </div>
-
-          <!-- Message textarea for detailed feedback. textarea supports longer text. -->
           <div class="field field-full">
             <label for="message">Your message</label>
             <textarea id="message" name="message" rows="6" placeholder="Write your feedback here..."></textarea>
           </div>
-
-          <!-- Optional file upload to demonstrate extra functionality. -->
           <div class="field field-full">
             <label for="screenshot">Attach screenshot (optional)</label>
             <input id="screenshot" name="screenshot" type="file" accept="image/*">
-            <!-- Comment: file input allows attachments. accept limits file types. -->
           </div>
-
-        </div> <!-- end feedback grid -->
+        </div>
       </fieldset>
 
-      <!-- Actions: submit and reset buttons -->
       <div class="actions">
         <button type="submit" class="btn primary">Submit feedback</button>
         <button type="reset" class="btn ghost">Reset form</button>
       </div>
-
     </form>
 
-    <!-- Back to top button. uses javascript to scroll. -->
     <button id="backToTop" title="Back to top">Top</button>
-
   </main>
 
   <footer class="site-footer">
     <p>Form created for coursework. Grid layout used for alignment and responsiveness.</p>
+  </footer>
 
   <script>
-    // Show back to top when user scrolls down
     const topBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
       if (document.documentElement.scrollTop > 300) topBtn.style.display = 'block';
@@ -159,9 +270,7 @@
     });
     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Example client-side validation on submit to demonstrate behavior
     document.getElementById('feedbackForm').addEventListener('submit', function (e) {
-      // Simple required check for fullname and email
       if (!document.getElementById('fullname').value || !document.getElementById('email').value) {
         e.preventDefault();
         alert('Please fill required fields: full name and email.');
