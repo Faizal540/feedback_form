@@ -1,16 +1,4 @@
-/* styles.css */
-/*
-  Comments below explain why each rule exists and what it does.
-  The stylesheet implements a dark theme, responsive 3-column grid, hover effects,
-  transitions for labels, and visual focus states for accessibility.
-*/
 :root{
-  /* THEME SWITCHING
-     You can change the theme by editing only these variables.
-     Uncomment the theme you want and comment the others. */
-
-  /* Default dark theme */
-  /* Default dark theme */
   --bg:#1435f0;
   --panel:#000000;
   --muted:#98a0ac;
@@ -18,40 +6,15 @@
   --accent:#2dd4bf;
   --accent-2:#06b6d4;
   --danger:#ef4444;
-
-  /* Light theme (optional)
-  --bg:#ffffff;
-  --panel:#f5f5f5;
-  --muted:#444444;
-  --text:#111111;
-  --accent:#0ea5e9;
-  --accent-2:#0369a1;
-  --danger:#dc2626;
-  */
-
-  /* Blue theme (optional)
-  --bg:#0a0f2d;
-  --panel:#0f1a3a;
-  --muted:#a3b0d6;
-  --text:#e6ebf8;
-  --accent:#3b82f6;
-  --accent-2:#1e40af;
-  --danger:#ef4444;
-  */
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
+*{box-sizing:border-box;}
+html,body{height:100%; margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; line-height:1.45; background:linear-gradient(180deg,var(--bg),#9e072d); color:var(--text);}
+
 body{
-  margin:0;
-  font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
-  background:linear-gradient(180deg,var(--bg),#9e072d);
-  color:var(--text);
-  line-height:1.45;
   padding:24px;
 }
 
-/* Header styles. logo included for branding using uploaded image */
 .site-header{
   display:flex;
   gap:16px;
@@ -59,20 +22,35 @@ body{
   max-width:1100px;
   margin:0 auto 18px auto;
 }
-.logo{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
-.site-header h1{font-size:20px;margin:0}
 
-/* Main form container styles */
-main{max-width:1100px;margin:0 auto}
+.site-header img{
+  max-width:70px;
+  height:auto;
+  border-radius:8px;
+  object-fit:cover;
+}
+
+.site-header h1{
+  font-size:20px;
+  margin:0;
+}
+
+main{
+  max-width:1100px;
+  margin:0 auto;
+  width:100%;
+}
+
 .form{
   background:var(--panel);
   border:1px solid rgba(255,255,255,0.04);
   padding:20px;
   border-radius:12px;
   box-shadow:0 6px 18px rgba(5, 25, 114, 0.6);
+  width:100%;
+  height:auto;
 }
 
-/* Grouped fieldset style. Fieldset used for semantic grouping and border hover effect */
 .group{
   border:1px solid rgba(255,255,255,0.06);
   padding:16px;
@@ -80,32 +58,26 @@ main{max-width:1100px;margin:0 auto}
   border-radius:8px;
   transition:box-shadow 200ms ease,border-color 200ms ease;
 }
-.group:hover{border-color:var(--accent);box-shadow:0 8px 30px rgba(13,38,43,0.2)}
-.group legend{padding:0 6px;font-weight:600;color:var(--muted)}
 
-/* Grid for form fields. creates 3 columns on wide screens for compact layout */
+.group:hover{border-color:var(--accent); box-shadow:0 8px 30px rgba(13,38,43,0.2);}
+.group legend{padding:0 6px; font-weight:600; color:var(--muted);}
+
 .form-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:14px;
-  align-items:start;
 }
 
-/* For the feedback section some fields span full width */
-.feedback-grid .field-full{grid-column:1 / -1}
+.feedback-grid .field-full{grid-column:1 / -1;}
+.field{display:flex; flex-direction:column; gap:8px;}
+.field-full{grid-column:1 / -1;}
 
-/* Field wrapper */
-.field{display:flex;flex-direction:column;gap:8px}
-.field-full{grid-column:1 / -1}
-
-/* Labels. transition used so labels animate when input receives focus. */
 label{
   font-size:13px;
   color:var(--muted);
-  transition:transform 180ms ease,color 180ms ease,opacity 180ms ease;
+  word-break:break-word;
 }
 
-/* Inputs, selects, textarea share base rules to maintain visual consistency */
 input[type=text],input[type=email],input[type=tel],input[type=file],select,textarea{
   background:transparent;
   border:1px solid rgba(255,255,255,0.06);
@@ -114,18 +86,12 @@ input[type=text],input[type=email],input[type=tel],input[type=file],select,texta
   border-radius:8px;
   outline:none;
   transition:border-color 160ms ease,box-shadow 160ms ease,transform 160ms ease;
+  width:100%;
 }
 
-/* Hover effect for inputs */
-input:hover,select:hover,textarea:hover{border-color:rgba(23, 8, 230, 0.18);transform:translateY(-2px)}
+input:hover,select:hover,textarea:hover{border-color:rgba(23, 8, 230, 0.18); transform:translateY(-2px);}
+input:focus,select:focus,textarea:focus{border-color:var(--accent); box-shadow:0 6px 18px rgba(45,212,191,0.08);}
 
-/* Focus state improves accessibility and keyboard users experience */
-input:focus,select:focus,textarea:focus{
-  border-color:var(--accent);
-  box-shadow:0 6px 18px rgba(45,212,191,0.08);
-}
-
-/* Buttons style with hover transition */
 .btn{
   padding:10px 16px;
   border-radius:10px;
@@ -135,40 +101,83 @@ input:focus,select:focus,textarea:focus{
   color:var(--text);
   transition:transform 150ms ease,background-color 150ms ease,border-color 150ms ease;
 }
-.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#022126}
-.btn.primary:hover{transform:translateY(-3px)}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
 
-/* Actions container aligns buttons on the right on large screens */
-.actions{display:flex;gap:12px;justify-content:flex-end;margin-top:8px}
+.btn.primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  border:none;
+  color:#022126;
+}
 
-/* Radios and checkboxes layout */
-.radios,label input[type=checkbox]{display:inline-flex}
-.checkboxes label{display:inline-flex;gap:8px;margin-right:8px}
+.btn.primary:hover{transform:translateY(-3px);}
+.btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.06);}
 
-/* Back to top button style and hidden by default */
+.actions{
+  display:flex;
+  gap:12px;
+  justify-content:flex-end;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+
+.radios label, .checkboxes label{display:inline-flex; gap:8px; flex-wrap:wrap;}
+
 #backToTop{
-  position:fixed;right:18px;bottom:18px;padding:10px 12px;border-radius:8px;border:none;display:none;background:var(--accent);color:#022126;cursor:pointer;box-shadow:0 6px 20px rgba(2,6,23,0.6);
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  padding:10px 12px;
+  border-radius:8px;
+  border:none;
+  display:none;
+  background:var(--accent);
+  color:#022126;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(2,6,23,0.6);
 }
 
-/* Footer */
-.site-footer{max-width:1100px;margin:12px auto 0 auto;color:var(--muted);font-size:13px}
+.site-footer{
+  max-width:1100px;
+  margin:12px auto 0 auto;
+  color:var(--muted);
+  font-size:13px;
+}
 
-/* Responsive rules: change grid to single column on small screens for readability */
+/* RESPONSIVE RULES */
+
+/* Large tablets / small laptops */
 @media (max-width:900px){
-  .form-grid{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:repeat(2,1fr);}
 }
+
+/* Tablets / medium screens */
 @media (max-width:620px){
-  .form-grid{grid-template-columns:1fr}
-  .actions{justify-content:stretch}
+  .form-grid{grid-template-columns:1fr;}
+  main, .form{max-width:100%; width:100%; padding:0 12px;}
+  body{padding:12px;}
 }
 
-/* Accessibility note: larger focus outline for keyboard users */
-input:focus-visible,select:focus-visible,textarea:focus-visible{box-shadow:0 0 0 3px rgba(6,182,212,0.12)}
+/* Small devices / mobiles */
+@media (max-width:480px){
+  body{padding:12px;}
+  input,select,textarea,.btn{width:100%;}
+  .actions{justify-content:stretch;}
+}
 
-/* Explanation comments for graders:
-  - Grid layout makes it easy to align fields and change column count with media queries.
-  - Fieldset groups improve accessibility and provide hoverable border for visual feedback.
-  - Inputs use transitions and focus styles to improve usability.
-  - Select and radio controls limit user errors by providing constrained choices.
-*/
+/* Remove vertical centering to allow natural scroll */
+@media (max-width:620px){
+  body{
+    display:block;
+    min-height:100vh;
+    overflow-y:auto;
+  }
+  main{
+    display:block;
+    width:100%;
+    margin:0 auto;
+  }
+  .form{
+    width:100%;
+    height:auto;
+    overflow-y:visible;
+  }
+}
