@@ -1,0 +1,172 @@
+
+<!doctype html>
+<html>
+<head>
+<title>Professional Feedback Form - Blue Theme</title>
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- page header with optional logo image from uploaded file -->
+  <header class="site-header">
+   <img src="my image.jpg"" width="70px" height="90px">
+     
+    <h1>Form</h1> 
+  </header>
+
+  <!-- Main form container -->
+  <main>
+    <!-- Using a form element so data can be submitted to a backend if needed -->
+    <form id="feedbackForm" class="form" novalidate>
+
+      <!-- Fieldset groups related inputs for accessibility and visual grouping -->
+      <fieldset class="group">
+        <legend>Personal details</legend>
+
+        <!-- Grid used to create 3-column layout on wide screens -->
+        <div class="form-grid">
+
+          <!-- Full name. type="text" accepts plain text. required attribute enforces input. -->
+          <div class="field">
+            <label for="fullname">Full name</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Your full name" required>
+            <!-- Comment: text input used for freeform short text. -->
+          </div>
+
+          <!-- Email. type="email" provides built-in browser validation for email format. -->
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" required>
+            <!-- Comment: email input helps mobile show email keyboard. -->
+          </div>
+
+          <!-- Phone. type="tel" brings numeric keypad on mobile devices. pattern limits characters. -->
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" placeholder="+234 800 000 0000" pattern="[0-9+ -]{7,}" >
+            <!-- Comment: pattern used to allow digits, plus and spaces. -->
+          </div>
+
+          <!-- Department. custom extra field. -->
+          <div class="field">
+            <label for="department">Department</label>
+            <input id="department" name="department" type="text" placeholder="Department or unit">
+          </div>
+
+          <!-- Level. custom extra field. example: level of study or job level. -->
+          <div class="field">
+            <label for="level">Level</label>
+            <select id="level" name="level">
+              <option value="">Select level</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="staff">Staff</option>
+            </select>
+            <!-- Comment: select reduces user errors for fixed choices. -->
+          </div>
+
+          <!-- Staff ID. extra field demonstrating another custom input. -->
+          <div class="field">
+            <label for="staffid">Staff ID</label>
+            <input id="staffid" name="staffid" type="text" placeholder="Optional">
+          </div>
+
+        </div> <!-- end grid -->
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Feedback details</legend>
+
+        <div class="form-grid feedback-grid">
+
+          <!-- Rating. using select for simple numeric rating. -->
+          <div class="field">
+            <label for="rating">Rating</label>
+            <select id="rating" name="rating" required>
+              <option value="">Choose</option>
+              <option value="1">1 - poor</option>
+              <option value="2">2</option>
+              <option value="3">3 - average</option>
+              <option value="4">4</option>
+              <option value="5">5 - excellent</option>
+            </select>
+          </div>
+
+          <!-- Recommendation. radio ensures single choice selection. -->
+          <div class="field">
+            <label>Recommend to others</label>
+            <div class="radios">
+              <label><input type="radio" name="recommend" value="yes" checked> Yes</label>
+              <label><input type="radio" name="recommend" value="no"> No</label>
+            </div>
+            <!-- Comment: radios for exclusive choice. -->
+          </div>
+
+          <!-- Improvements. checkbox allows multiple selections. -->
+          <div class="field">
+            <label for="improvements">Areas to improve</label>
+            <div class="checkboxes" id="improvements">
+              <label><input type="checkbox" name="improve" value="ux"> UX
+              </label>
+              <label><input type="checkbox" name="improve" value="features"> Features
+              </label>
+              <label><input type="checkbox" name="improve" value="support"> Support
+              </label>
+            </div>
+            <!-- Comment: checkboxes let user select multiple items. -->
+          </div>
+
+          <!-- Message textarea for detailed feedback. textarea supports longer text. -->
+          <div class="field field-full">
+            <label for="message">Your message</label>
+            <textarea id="message" name="message" rows="6" placeholder="Write your feedback here..."></textarea>
+          </div>
+
+          <!-- Optional file upload to demonstrate extra functionality. -->
+          <div class="field field-full">
+            <label for="screenshot">Attach screenshot (optional)</label>
+            <input id="screenshot" name="screenshot" type="file" accept="image/*">
+            <!-- Comment: file input allows attachments. accept limits file types. -->
+          </div>
+
+        </div> <!-- end feedback grid -->
+      </fieldset>
+
+      <!-- Actions: submit and reset buttons -->
+      <div class="actions">
+        <button type="submit" class="btn primary">Submit feedback</button>
+        <button type="reset" class="btn ghost">Reset form</button>
+      </div>
+
+    </form>
+
+    <!-- Back to top button. uses javascript to scroll. -->
+    <button id="backToTop" title="Back to top">Top</button>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Form created for coursework. Grid layout used for alignment and responsiveness.</p>
+
+  <script>
+    // Show back to top when user scrolls down
+    const topBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (document.documentElement.scrollTop > 300) topBtn.style.display = 'block';
+      else topBtn.style.display = 'none';
+    });
+    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Example client-side validation on submit to demonstrate behavior
+    document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+      // Simple required check for fullname and email
+      if (!document.getElementById('fullname').value || !document.getElementById('email').value) {
+        e.preventDefault();
+        alert('Please fill required fields: full name and email.');
+      }
+    });
+  </script>
+</body>
+</html>
